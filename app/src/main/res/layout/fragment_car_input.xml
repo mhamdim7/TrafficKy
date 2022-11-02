@@ -7,6 +7,7 @@
     tools:context=".ui.CarInputFragment">
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
@@ -27,12 +28,14 @@
         app:layout_constraintBottom_toTopOf="@id/button_start_driving"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.06999999">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/text_input_car_model"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textAutoComplete"
             android:background="@color/semi_transparent"
             android:textStyle="bold" />
 
@@ -42,8 +45,9 @@
         android:id="@+id/button_start_driving"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:maxLines="1"
         android:text="@string/start_driving"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_input_container_car_model" />

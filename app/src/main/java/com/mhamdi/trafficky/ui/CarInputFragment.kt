@@ -8,26 +8,21 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.mhamdi.trafficky.R
 import com.mhamdi.trafficky.databinding.FragmentCarInputBinding
+import com.mhamdi.trafficky.extensions.FragmentExtensions.viewLifecycle
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class CarInputFragment : Fragment() {
 
-    private var _binding: FragmentCarInputBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private var binding: FragmentCarInputBinding by viewLifecycle()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        _binding = FragmentCarInputBinding.inflate(inflater, container, false)
+        binding = FragmentCarInputBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,10 +31,5 @@ class CarInputFragment : Fragment() {
         binding.buttonStartDriving.setOnClickListener {
             findNavController().navigate(R.id.action_CarInputFragment_to_RoadLightsFragment)
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

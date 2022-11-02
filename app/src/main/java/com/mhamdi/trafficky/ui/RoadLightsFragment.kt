@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.mhamdi.trafficky.LightStates
 import com.mhamdi.trafficky.databinding.FragmentRoadLightsBinding
+import com.mhamdi.trafficky.extensions.FragmentExtensions.viewLifecycle
 import com.mhamdi.trafficky.extensions.ViewExtensions.updateTransitionState
 
 
@@ -16,11 +18,7 @@ import com.mhamdi.trafficky.extensions.ViewExtensions.updateTransitionState
  */
 class RoadLightsFragment : Fragment() {
 
-    private var _binding: FragmentRoadLightsBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private var binding: FragmentRoadLightsBinding by viewLifecycle()
 
     private val viewModel: RoadLightsViewModel by viewModels()
 
@@ -28,10 +26,8 @@ class RoadLightsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        _binding = FragmentRoadLightsBinding.inflate(inflater, container, false)
+        binding = FragmentRoadLightsBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,8 +39,10 @@ class RoadLightsFragment : Fragment() {
 
             uiState.observe(viewLifecycleOwner) {
                 it?.let {
-                    binding.updateUi(it)
-                    binding.buttonTryAgain.isEnabled = it == LightStates.RED
+                    binding.run {
+                        updateTrafficLightsUi(it)
+                        buttonTryAgain.isEnabled(it)
+                    }
                 }
             }
 
@@ -54,12 +52,11 @@ class RoadLightsFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun Button.isEnabled(it: LightStates) {
+        isEnabled = it == LightStates.RED
     }
 
-    private fun FragmentRoadLightsBinding.updateUi(state: LightStates) = when (state) {
+    private fun FragmentRoadLightsBinding.updateTrafficLightsUi(state: LightStates) = when (state) {
         LightStates.GREEN -> {
             greenBulb.updateTransitionState(true)
             orangeBulb.updateTransitionState(false)

@@ -7,12 +7,11 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.mhamdi.trafficky.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-
+        android:name="com.mhamdi.trafficky.CarInputFragment"
+        android:label="@string/car_input_fragment_label"
+        tools:layout="@layout/fragment_car_input">
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            android:id="@+id/action_CarInputFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
     </fragment>
     <fragment
@@ -20,9 +19,8 @@
         android:name="com.mhamdi.trafficky.SecondFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
-
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            android:id="@+id/action_SecondFragment_to_CarInputFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>

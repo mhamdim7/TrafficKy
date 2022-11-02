@@ -1,4 +1,4 @@
-package com.mhamdi.trafficky
+package com.mhamdi.trafficky.ui
 
 import android.os.Bundle
 import android.view.Menu
@@ -8,6 +8,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.mhamdi.trafficky.R
 import com.mhamdi.trafficky.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
